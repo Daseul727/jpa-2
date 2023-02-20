@@ -40,11 +40,26 @@ public class JpaMain {
         
         try {
 
-            Member findMember = em.find(Member.class, 1L);
+            Team team = new Team();
+            team.setTeamName("TEAM_A");
 
-            //persistense 안해도 이 순간 set 변경감지해서 update 쿼리나감
-            findMember.setName("sssss");
+            em.flush();
 
+            Member member = new Member();
+            member.setName("AAA");
+            member.setTeam(team);
+
+            Member member2 = new Member();
+            member2.setName("BBB");
+            member2.setTeam(team);
+
+            Member member3 = new Member();
+            member3.setName("CCC");
+            member3.setTeam(team);
+
+            em.flush();
+
+            
 
             ts.commit();
         } catch (Exception e) {
